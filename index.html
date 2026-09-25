@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cápsula do Tempo 💜</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Georgia, serif;
+}
+
+body{
+background:black;
+overflow:hidden;
+height:100vh;
+color:white;
+}
+
+#bg{
+position:fixed;
+width:100%;
+height:100%;
+overflow:hidden;
+}
+
+.star{
+position:absolute;
+color:#d68cff;
+cursor:pointer;
+animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+50%{
+transform:scale(1.4);
+}
+}
+
+.glitter{
+position:absolute;
+width:3px;
+height:3px;
+background:#d68cff;
+border-radius:50%;
+animation:glow 3s infinite;
+}
+
+@keyframes glow{
+50%{
+opacity:.2;
+transform:scale(2);
+}
+}
+
+.heart{
+position:absolute;
+color:#ff66cc;
+opacity:.25;
+animation:float 10s linear infinite;
+}
+
+@keyframes float{
+from{
+transform:translateY(100vh);
+}
+to{
+transform:translateY(-100px);
+}
+}
+
+.love{
+position:absolute;
+color:#d68cff;
+opacity:.08;
+font-size:30px;
+animation:fade 8s infinite;
+}
+
+@keyframes fade{
+50%{
+opacity:.25;
+}
+}
+
+.center{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+text-align:center;
+z-index:10;
+}
+
+h1{
+font-size:50px;
+color:#d68cff;
+text-shadow:0 0 20px #d68cff;
+}
+
+button{
+margin-top:20px;
+padding:15px 30px;
+border:none;
+border-radius:30px;
+background:#d68cff;
+color:white;
+font-size:18px;
+cursor:pointer;
+}
+
+.modal{
+display:none;
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:80%;
+max-width:700px;
+max-height:80vh;
+overflow:auto;
+background:rgba(20,0,30,.95);
+border:2px solid #d68cff;
+border-radius:20px;
+padding:25px;
+z-index:999;
+box-shadow:0 0 30px #d68cff;
+}
+
+.modal h2{
+margin-bottom:15px;
+color:#d68cff;
+}
+
+.close{
+margin-top:20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="bg"></div>
+
+<div class="center">
+<h1>🌌 Cápsula do Tempo 💜</h1>
+
+<p style="margin-top:15px">
+Algumas pessoas estão longe dos olhos,<br>
+mas nunca do coração.
+</p>
+
+<button onclick="abrirGalaxia()">
+Abrir Memórias ✨
+</button>
+</div>
+
+<div id="modal" class="modal">
+<h2 id="titulo"></h2>
+<p id="texto"></p>
+<button class="close" onclick="fechar()">
+Fechar 💜
+</button>
+</div>
+
+<script>
+
+const memorias = {
+
+"🌙 Saudade":
+`Quando nos falávamos sem hora para terminar.
+
+Em ligações, em mensagens ou quando jogávamos juntas.
+
+Eu sentia que o tempo passava diferente quando estava com você.
+
+E talvez seja disso que eu mais sinta falta:
+
+da sensação de que algumas horas ao seu lado pareciam minutos.`,
+
+"💌 Mensagens":
+`Amor, boa noite.
+
+Eu sei que, se estivesse aqui, você não dormiria sem me desejar boa noite.
+
+E talvez seja por isso que sinto sua falta.
+
+Sinto falta da sua voz.
+
+Sinto falta até das nossas discussões.
+
+Que loucura.
+
+Eu amo tudo em você.
+
+Você é linda.
+
+A mulher mais linda que eu já vi.
+
+Eu me senti amada por você de uma forma que nunca tinha sentido antes.
+
+Boa noite, meu amor.
+
+Eu amo você.`,
+
+"📸 Momentos Favoritos":
+`Você sorrindo comigo.
+
+Você sorrindo para mim.
+
+Sua mão cobrindo a boca enquanto ria.
+
+Pequenos momentos.
+
+Mas algumas das minhas lembranças favoritas.`,
+
+"🫂 Abraço":
+`Eu precisei de um abraço quando estávamos afastadas.
+
+Eu estava magoada.
+
+Mas mesmo assim nunca deixei de desejar que você estivesse bem.
+
+Estando comigo ou não.
+
+Porque acima de tudo eu sempre quis sua felicidade.`,
+
+"✨ Coisas que Nunca Disse":
+`Talvez a desistência de uma de nós seja necessária algum dia.
+
+Mesmo doendo.
+
+Mesmo que eu não queira.
+
+Eu rezei para conseguir te entender.
+
+Eu rezei por nós.`,
+
+"⭐ Destino":
+`Um dia talvez.
+
+Ou talvez não.
+
+Não posso prometer o futuro.
+
+Mas posso dizer que te amei.
+
+Talvez eu te encontre em um futuro próximo.
+
+Talvez em um futuro distante.
+
+Seja como for...
+
+eu te amei.
+
+💜`
+}
+
+function abrirGalaxia(){
+
+document.querySelector(".center").style.display="none";
+
+const bg=document.getElementById("bg");
+
+Object.keys(memorias).forEach(nome=>{
+
+let estrela=document.createElement("div");
+
+estrela.className="star";
+
+estrela.innerHTML=nome;
+
+estrela.style.left=Math.random()*90+"vw";
+estrela.style.top=Math.random()*90+"vh";
+
+estrela.onclick=()=>{
+document.getElementById("titulo").innerText=nome;
+document.getElementById("texto").innerText=memorias[nome];
+document.getElementById("modal").style.display="block";
+}
+
+bg.appendChild(estrela);
+
+});
+}
+
+function fechar(){
+document.getElementById("modal").style.display="none";
+}
+
+for(let i=0;i<120;i++){
+
+let g=document.createElement("div");
+
+g.className="glitter";
+
+g.style.left=Math.random()*100+"vw";
+g.style.top=Math.random()*100+"vh";
+
+document.body.appendChild(g);
+
+}
+
+for(let i=0;i<25;i++){
+
+let h=document.createElement("div");
+
+h.className="heart";
+
+h.innerHTML="💜";
+
+h.style.left=Math.random()*100+"vw";
+
+document.body.appendChild(h);
+
+}
+
+for(let i=0;i<12;i++){
+
+let l=document.createElement("div");
+
+l.className="love";
+
+l.innerHTML="eu te amo";
+
+l.style.left=Math.random()*100+"vw";
+l.style.top=Math.random()*100+"vh";
+
+document.body.appendChild(l);
+
+}
+
+</script>
+
+</body>
+</html>
